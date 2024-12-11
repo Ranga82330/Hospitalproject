@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page HTML</title>
+  <link rel="stylesheet" href="mystyles2.css" />
+  <link rel="shortcut icon" href="dog.jpg">
+  <style>
+    .newform {
+        padding: 10px;
+        border-radius: 30px;
+        border-width: 10px;
+        border-color: #b95d52;
+        border-style: double;
+        width: 25%;
+        margin-top: 7%;
+        margin-bottom: 5%;
+        padding-top: 40px;
+        padding-bottom: 30px;
+        box-shadow: 2px 2px 4px 2px rgb(0, 20, 30);
+    }
+
+    .submit {
+        font-size: 20px;
+        border-radius: 10px;
+    }
+
+    .button {
+        font-size: 20px;
+        border-radius: 10px;
+    }
+
+    .button:hover {
+        background-color: darkcyan;
+    }
+
+    .submit:hover {
+        background-color: darkcyan;
+    }
+    input.largerCheckbox  {
+        width: 20px;
+        height: 20px;
+    }
+
+    @media screen and (max-width: 360px) {
+        .newform {
+            padding: 5px;
+            border-radius: 30px;
+            border-width: 10px;
+            border-color: #b95d52;
+            border-style: double;
+            width: 80%;
+            margin-top: 20%;
+            margin-bottom: 5%;
+            padding-top: 40px;
+            padding-bottom: 30px;
+            box-shadow: 2px 2px 4px 2px rgb(0, 20, 30);
+        }
+
+        .submit {
+            font-size: 17px;
+            border-radius: 10px;
+        }
+
+        .button {
+            font-size: 17px;
+            border-radius: 10px;
+        }
+
+        .button:hover {
+            background-color: darkcyan;
+        }
+
+        .submit:hover {
+            background-color: darkcyan;
+        }
+    }
+
+</style>
+  <script>
+    function login(event) {
+      // Prevent default form submission
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Perform basic validation (optional)
+      if (username === '' || password === '') {
+        alert('Please enter both username and password.');
+        return;
+      }
+
+      // Make an AJAX request to validate login credentials on the server
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'login_check.php', true); // Replace with your server-side script URL
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onload = function() {
+        const response = JSON.parse(this.responseText);
+        if (response.success) {
+          alert('Login successful! Redirecting...');
+          // Store username in session storage (for non-persistent sessions)
+          sessionStorage.setItem('username', username);
+          // OR store a secure token in cookies (for persistent sessions)
+          document.cookie = `auth_token=${response.token}; HttpOnly; Path=/`; // Assuming response.token exists
+          window.location.href = 'loginsucess.html'; // Redirect to success page
+        } else {
+          alert('Invalid username or password!');
+        }
+      };
+      xhr.onerror = function() {
+        alert('Error logging in. Please try again later.');
+      };
+      xhr.send('username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password));
+    }
+
+    function showPassword() {
+      const passwordInput = document.getElementById('password');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+      } else {
+        passwordInput.type = 'password';
+      }
+    }
+  </script>
+</head>
+
+<center>
+<body class="mainbody">
+  <nav>
+    <ul class="header">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html">About </a></li>
+      <li><a href="contact.html">Contact us</a></li>
+      <li><a href="Registration.html">Registration</a></li>
+      <li><a href="Exp12-Loginpage.html">Login</a></li>
+    </ul>
+  </nav>
+  <section class="newform">
+    <h3>LOGIN PAGE</h3>
+    <form onsubmit="login(event)" method="POST">
+        User Name : <input type="text" id="username" name="username" required placeholder="Enter the User name"> <br><br>
+        Password : <input type="password" id="password" name="password" required placeholder="Enter the Password"> <br><br>
+        <input type="checkbox" onclick="showPassword() " class="largerCheckbox">Show Password <br>
+        <br>
+        <input type="submit" class="submit" value="Submit" >
+    </form>
+    <br>
+    <form action="forgetpage.html">
+      <button class="button">Forget Password</button>
+    </form>
+    <div id="alertBox" style="color: red; display: none;"></div>
+  </section>
+</center>
+
+<div class="footer">
+  <marquee><p> &copy; 2024 Pure Medical HealthCare. All rights reserved</p></marquee>
+</div>
+</body>
+</html>

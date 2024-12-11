@@ -1,0 +1,247 @@
+<html>
+    <head>
+        <title>Login sucess page </title>
+        <link rel="stylesheet" href="mystyles2.css"/>
+        <style>
+            h1 {
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            section {
+                background-color:rgb(57, 176, 176);
+                border-radius: 20px;
+                padding: 20px;
+                margin-bottom: 20px;
+                border: 1px solid #000000;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                flex-basis: 50%;
+                text-align: center;
+                margin-left: 33%;
+                list-style-type: none;
+                width: 35%;
+                margin-bottom: 5%;
+                float: left;
+            }
+
+            section ul{
+                margin: 10px;
+                padding: 20px;
+                list-style-type: none;
+                display: flex;
+                justify-content: center;
+                display: flex;
+                flex-wrap: wr;
+            }
+
+            h2 {
+                margin-top: 0;
+                text-align: center;
+            }
+
+            p {
+                text-align: center;
+            }
+            h1{
+                text-align: center;
+                padding-bottom: 15px;
+            }
+            .appointmentdata{
+             padding-top: 3%;
+             padding-bottom: 3%;
+
+            }
+            .appointmentdata li {
+                color: #000000;
+                font-weight: bold;
+            }
+            .buton{
+                font-size: 20px;
+                border-radius: 10px;
+            }
+            .buton a{
+                text-decoration: none;
+               
+            }
+            .buton:hover{
+                background-color: darkcyan;
+                color: white;
+            }
+            a:hover{
+                background-color: darkcyan;
+                color: white;
+            }
+            a{
+            text-decoration: none;
+            color: rgb(14, 13, 13);
+            }
+            .dropbtn {
+            color: rgb(242, 236, 236);
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            right: 0;
+            top: 0;
+            }
+
+            .dropdown{
+                position:absolute;
+                margin-left: 82%;
+                top: 40;
+                border: none;
+                right: 45;
+            }
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #8d8d8dd2;
+            border-radius: 20px;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 99999;
+            }
+            .dropdown-content a {
+            color: rgb(14, 11, 11);
+            padding: 12px 16px;
+            text-decoration: none;
+            color: rgb(253, 253, 253);
+            display: block;
+            border-radius: 5px;
+            }
+            .dropdown-content a:hover {background-color: rgb(24, 203, 223);border-radius: 5px;color:black;}
+
+            .dropdown:hover .dropdown-content{display: block;border-radius: 5px;}
+        </style>
+    </head>
+    <body class="mainbody">
+        <center>
+            <nav>
+                <ul class="header">
+                    <li><a href="home.html"> Home</a></li>
+                    <li><a href="about.html">About </a></li>
+                    <li><a href="contact.html"> Contact us</a></li>
+                </ul>
+            </nav>
+    </center>
+    <h1>Doctor's Appointment's</h1>
+    <div>
+        <section class="appointmentdata">
+            <li>
+                <form action="doctordata.php" method="POST">
+                    <h2>Dr. Jeffrey Sherman</h2>
+                    <p>Cardiologists</p>
+                    <p>Rating: 4.8</p>
+                    <p>Availability: 10pm-2pm</p>
+                    <p>Fees: ₹ 2000</p>
+                    
+                    <!-- Use hidden input fields to submit doctorname and doctorspecialist -->
+                    <input type="hidden" name="doctorname" value="Dr. Jeffrey Sherman">
+                    <input type="hidden" name="doctorspecialist" value="Cardiologists">
+                    
+                    <button type="submit" class="buton">Appointment</button>
+                  </form>
+            </li>
+        </section>
+
+        <section class="appointmentdata">
+            <li>
+                        <form action="doctordata.php" method="POST">
+                                <h2>Dr. Amanda Pilone</h2>
+                            <p>Endocrinologists</p>
+                            <p>Rating: 4.8</p>
+                            <p>Availability: 10pm-2pm</p>
+                            <p>Fees: ₹ 1899</p>
+                            
+                            <!-- Use hidden input fields to submit doctorname and doctorspecialist -->
+                            <input type="hidden" name="doctorname" value="Dr. Amanda Pilone">
+                            <input type="hidden" name="doctorspecialist" value="Endocrinologists">
+                            
+                            <button type="submit" class="buton">Appointment</button>
+                          </form>
+            </li>
+         </section>
+
+         <section class="appointmentdata">   
+            <li>
+                <form action="doctordata.php" method="POST">
+                <h2>Dr. Chris Westley</h2>
+                <p>Neurologists</p>
+                <p>Rating: 4.8</p>
+                <p>Availability: 10pm-2pm</p>
+                <p>Fees: ₹ 2500 </p>
+                <input type="hidden" name="doctorname" value="Dr. Chris Westley">
+                <input type="hidden" name="doctorspecialist" value="Neurologists">
+                <button type="submit" class="buton">Appointment</button>
+              </form>
+        </li>
+          </section>
+
+        <section class="appointmentdata">
+                    <li>
+                        <form action="doctordata.php" method="POST">
+                            <h2>Dr. Aaliya Yaqub</h2>
+                            <p>Orthopaedist</p>
+                            <p>Rating: 4.8</p>
+                            <p>Availability: 10pm-2pm</p>
+                            <p>Fees: ₹ 1999 </p>
+                        
+                        <!-- Use hidden input fields to submit doctorname and doctorspecialist -->
+                        <input type="hidden" name="doctorname" value="Dr. Aaliya Yaqub">
+                        <input type="hidden" name="doctorspecialist" value="Orthopaedist">
+                        
+                        <button type="submit" class="buton">Appointment</button>
+                      </form>
+                    </li>
+        </section >
+
+        
+        <section class="appointmentdata">
+            <li>
+                <form action="doctordata.php" method="POST">
+                    <h2>Dr.Angelina jolie</h2>
+                <p>Gynecologist</p>
+                <p>Rating: 4.8</p>
+                <p>Availability: 10pm-2pm</p>
+                <p>Fees: ₹ 1399</p>
+                
+                <!-- Use hidden input fields to submit doctorname and doctorspecialist -->
+                <input type="hidden" name="doctorname" value="Dr.Angelina jolie">
+                <input type="hidden" name="doctorspecialist" value="Gynecologist">
+                
+                <button type="submit" class="buton">Appointment</button>
+              </form>
+            </li>
+        </section>
+
+        <section class="appointmentdata">
+                    <li>
+                        <form action="doctordata.php" method="POST">
+                            <h2>Dr. Taylor swifte</h2>
+                            <p>Dermatologist</p>
+                            <p>Rating: 4.8</p>
+                            <p>Availability: 10pm-2pm</p>
+                            <p>Fees: ₹ 1799</p>
+                        
+                        <!-- Use hidden input fields to submit doctorname and doctorspecialist -->
+                        <input type="hidden" name="doctorname" value="Dr. Taylor swifte">
+                        <input type="hidden" name="doctorspecialist" value="Dermatologist">
+                        
+                        <button type="submit" class="buton">Appointment</button>
+                      </form>
+                    </li>
+        </section>
+        </ul>
+    </div>
+    <div class="dropdown">
+        <span class="dropbtn"><img src="profile1.png" width="100px"; alt="img not found "></span>
+        <div class="dropdown-content">
+            <a href="profile.php">Profile</a>
+            <a href="update_profile.php">Update Profile</a>
+            <a href="index.html">Sign Out</a>
+        </div>
+      </div>
+    <div class="footer">
+        <marquee><p> &copy; 2024 Pure Medical HealthCare .All rights reversed</p></marquee>
+       </div>
+        </body>
+    </html>

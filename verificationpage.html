@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Code Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url(picture2.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 320px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .code-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .code-input {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .code-input:focus {
+            border-color: #007bff;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .resend-button {
+            background-color: #28a745;
+        }
+
+        .resend-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #timer {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .notification {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            color: #ffffff;
+            background-color: #28a745;
+        }
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const inputs = document.querySelectorAll('.code-input');
+            const resendButton = document.getElementById('resendButton');
+            const timerElement = document.getElementById('timer');
+            const notification = document.getElementById('notification');
+            let timer = 30;
+
+            // Function to handle input navigation
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (event) => {
+                    if (event.target.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener('keydown', (event) => {
+                    if (event.key === 'Backspace' && !event.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+
+                input.addEventListener('paste', (event) => {
+                    event.preventDefault();
+                    const pastedData = event.clipboardData.getData('text').slice(0, 1);
+                    event.target.value = pastedData;
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+            });
+
+            // Function to start the timer for the resend button
+            function startTimer() {
+                resendButton.disabled = true;
+                timerElement.textContent = `Resend available in ${timer} seconds`;
+                const countdown = setInterval(() => {
+                    timer -= 1;
+                    timerElement.textContent = `Resend available in ${timer} seconds`;
+                    if (timer <= 0) {
+                        clearInterval(countdown);
+                        resendButton.disabled = false;
+                        timerElement.textContent = '';
+                        timer = 30; // Reset timer
+                    }
+                }, 1000);
+            }
+
+            // Initial call to disable the resend button and start the timer
+            startTimer();
+
+            // Event listener for the resend button
+            resendButton.addEventListener('click', () => {
+                // Simulate the resend functionality
+                notification.textContent = 'Verification code has been resent!';
+                notification.style.display = 'block';
+                notification.style.backgroundColor = '#28a745'; // Green color for success
+
+                // Reset the notification after a few seconds
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 6000); // Hide after 3 seconds
+
+                startTimer(); // Restart the timer after resending the code
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <div id="notification" class="notification"></div> <!-- Notification Area -->
+        <form id="verificationForm">
+            <h2>Enter Verification Code</h2>
+            <div class="code-inputs">
+                <input type="text" maxlength="1" class="code-input" id="code1" required>
+                <input type="text" maxlength="1" class="code-input" id="code2" required>
+                <input type="text" maxlength="1" class="code-input" id="code3" required>
+                <input type="text" maxlength="1" class="code-input" id="code4" required>
+                <input type="text" maxlength="1" class="code-input" id="code5" required>
+                <input type="text" maxlength="1" class="code-input" id="code6" required>
+            </div>
+            <button type="submit">Submit</button>
+            <button type="button" id="resendButton" class="resend-button" disabled>Resend Code</button>
+            <div id="timer"></div>
+            
+        </form>
+    </div>
+</body>
+</html>

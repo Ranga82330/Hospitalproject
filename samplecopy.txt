@@ -1,0 +1,308 @@
+<?php
+// Start session for storing user info
+session_start();
+
+// Connect to the database
+$conn = mysqli_connect("localhost", "root", "", "project");
+
+if (!$conn) {
+    echo json_encode(['success' => false, 'message' => 'Failed to connect to the database']);
+    exit();  
+}
+
+// Get username and password from POST request
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Set the content type to JSON
+header('Content-Type: application/json');
+
+// Use prepared statements to prevent SQL injection
+$stmt = $conn->prepare("SELECT id FROM data WHERE username = ? AND password = ?");
+$stmt->bind_param("ss", $username, $password);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if (!$result) {
+    echo json_encode(['success' => false, 'message' => 'Error executing query']);
+    exit();
+}
+
+$count = $result->num_rows;
+
+if ($count >0) {
+    // Fetch the user ID
+    $row = $result->fetch_assoc();
+    $_SESSION['user_id'] = $row['id']; // Store user ID in session
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid Username or Password']);
+}
+
+// Close the connection
+$conn->close();
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+// Start session for storing user info
+session_start();
+
+// Connect to the database
+$conn = mysqli_connect("localhost", "root", "", "project");
+
+if (!$conn) {
+    echo json_encode(['success' => false, 'message' => 'Failed to connect to the database']);
+    exit();  
+}
+
+// Get username and password from POST request
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Set the content type to JSON
+header('Content-Type: application/json');
+
+// Use prepared statements to prevent SQL injection
+$login_stmt = $conn->prepare("SELECT id, password FROM data WHERE username = ?");
+$login_stmt->bind_param("s", $username);
+$login_stmt->execute();
+$result = $login_stmt->get_result();
+
+if (!$result) {
+    echo json_encode(['success' => false, 'message' => 'Error executing query']);
+    exit();
+}
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    
+    // Verify the password (use password_hash and password_verify for secure passwords)
+    if (password_verify($password, $row['password'])) {
+        // Fetch the user ID
+        $user_id = $row['id'];
+        $_SESSION['user_id'] = $user_id; // Store user ID in session
+
+        // Generate a random token
+        $token = bin2hex(random_bytes(16));  // 16 bytes = 32 characters
+        $expire_time = time() + (86400 * 30); // 30 days
+        
+        // Store the token in the user's database record for later verification
+        $update_stmt = $conn->prepare("UPDATE data SET login_token = ? WHERE id = ?");
+        $update_stmt->bind_param("si", $token, $user_id);
+        $update_stmt->execute();
+
+        // Set a cookie with the token that lasts for 30 days
+        setcookie('login_token', $token, $expire_time, "/");
+
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Invalid Username or Password']);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid Username or Password']);
+}
+
+// Close the connection
+$conn->close();
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exp12 loginpage code
+<html>
+<head>
+    <title>Login page HTML</title>
+    <link rel="stylesheet" href="mystyles2.css" />
+    <link rel="shortcut icon" href="dog.jpg">
+    <style>
+        .newform {
+            padding: 10px;
+            border-radius: 30px;
+            border-width: 10px;
+            border-color: #b95d52;
+            border-style: double;
+            width: 25%;
+            margin-top: 7%;
+            margin-bottom: 5%;
+            padding-top: 40px;
+            padding-bottom: 30px;
+            box-shadow: 2px 2px 4px 2px rgb(0, 20, 30);
+        }
+
+        .submit {
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .button {
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .button:hover {
+            background-color: darkcyan;
+        }
+
+        .submit:hover {
+            background-color: darkcyan;
+        }
+        input.largerCheckbox  {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media screen and (max-width: 360px) {
+            .newform {
+                padding: 5px;
+                border-radius: 30px;
+                border-width: 10px;
+                border-color: #b95d52;
+                border-style: double;
+                width: 80%;
+                margin-top: 20%;
+                margin-bottom: 5%;
+                padding-top: 40px;
+                padding-bottom: 30px;
+                box-shadow: 2px 2px 4px 2px rgb(0, 20, 30);
+            }
+
+            .submit {
+                font-size: 17px;
+                border-radius: 10px;
+            }
+
+            .button {
+                font-size: 17px;
+                border-radius: 10px;
+            }
+
+            .button:hover {
+                background-color: darkcyan;
+            }
+
+            .submit:hover {
+                background-color: darkcyan;
+            }
+        }
+
+    </style>
+    <script> 
+        function login(event) {
+            // Prevent the form from submitting normally
+            event.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Make an AJAX request to validate login
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'login_check.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                var response = JSON.parse(this.responseText);
+                if (response.success) {
+                    alert('Login successful! Redirecting...');
+                        sessionStorage.setItem('username', username);
+                        window.location.href = 'loginsucess.html'; 
+                } else {
+                    window.location.href='Exp12-Loginpage.html';
+                    alert('Invalid username or password !...');            }
+            };
+            xhr.send('username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password));
+        }
+            function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+        }
+       
+    </script>
+</head>
+
+<center>
+
+<body class="mainbody">
+    <nav>
+        <ul class="header">
+            <li><a href="home.html"> Home</a></li>
+            <li><a href="about.html">About </a></li>
+            <li><a href="contact.html"> Contact us</a></li>
+            <li><a href="Registration.html">Registration</a></li>
+            <li><a href="Exp12-Loginpage.html">Login</a></li>
+        </ul>
+    </nav>
+    <section class="newform">
+        <!-- Removed form action to prevent form from submitting -->
+        <form onsubmit="login(event)"method="POST">
+            <h3>LOGIN PAGE</h3>
+            User Name : <input type="text" id="username" name="username" required placeholder="Enter the User name"> <br><br>
+            Password : <input type="password" id="password" name="password" required placeholder="Enter the Password"> <br><br>
+            <input type="checkbox" onclick="myFunction()" class="largerCheckbox">Show Password <br><br>
+            <input type="submit" class="submit" value="Submit" >
+        </form>
+
+        <form action="forgetpage.html">
+            <button class="button" >Forget password</button>
+        </form>
+
+        <!-- Added alertBox to show error messages -->
+        <div id="alertBox" style="color: red; display: none;"></div>
+    </section>
+</center>
+
+<div class="footer">
+    <marquee><p> &copy; 2024 Pure Medical HealthCare. All rights reserved</p></marquee>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,494 @@
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 15px;
+            color: white;
+        }
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar ul li {
+            position: relative;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        .navbar ul li:hover {
+            background-color: #555;
+        }
+        .navbar ul li ul {
+            display: none;
+            position: absolute;
+            background-color: white;
+            color: black;
+            top: 40px;
+            left: 0;
+            min-width: 150px;
+            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar ul li:hover ul {
+            display: block;
+        }
+        .navbar ul li ul li {
+            padding: 10px;
+            color: #333;
+        }
+        .navbar ul li ul li:hover {
+            background-color: #ddd;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+            height: 80vh;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+        }
+        h2 img{
+          width: 7%;
+          border-radius: 2%;
+        }
+        h2{
+          height: 1%;
+        }
+    </style>
+</head>
+<body>
+
+    Navbar
+    <div class="navbar">
+        <div class="logo">
+            <h2><img src="profile1.png" alt="img not found">Doctris</h2>
+        </div>
+        <ul>
+            <li>Home
+                <ul>
+                    <li>Index One</li>
+                    <li>Index Two</li>
+                    <li>Index Three</li>
+                </ul>
+            </li>
+            <li>Doctors</li>
+            <li>Patients</li>
+            <li>Pharmacy</li>
+            <li>Pages</li>
+            <li>Admin</li>
+        </ul>
+    </div>
+ 
+    Hero Section
+     <div class="hero">
+        <h1>Meet The Best Doctor</h1>
+        <p>Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .sidebar h2 {
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 20px 0;
+            color: #333;
+            font-weight: 500;
+        }
+        .sidebar ul li span {
+            color: red;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .sidebar ul li:hover {
+            cursor: pointer;
+            color: #007bff;
+        }
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: scroll;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .stats-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 23%;
+            text-align: center;
+        }
+        .card h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .card p {
+            font-size: 16px;
+            color: gray;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .chart-card {
+            width: 48%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Latest Appointments, Chat, and Reviews */
+        .appointments-chat-reviews {
+            display: flex;
+            margin-top: 30px;
+            justify-content: space-between;
+        }
+        .appointments, .chat-section, .reviews {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 32%;
+        }
+        .appointments h3, .chat-section h3, .reviews h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+        .appointments-list, .patients-reviews-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .appointments-list li, .patients-reviews-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .appointments-list li:last-child, .patients-reviews-list li:last-child {
+            border-bottom: none;
+        }
+        .appointments-list li img, .patients-reviews-list li img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .chat-section {
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        .chat-message {
+            margin-bottom: 15px;
+        }
+        .chat-message img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .message-input {
+            display: flex;
+        }
+        .message-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+        .message-input button {
+            padding: 10px 15px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Doctris</h2>
+            <ul>
+                <li>Dashboard</li>
+                <li>Layouts <span>New</span></li>
+                <li>Appointment</li>
+                <li>Doctors</li>
+                <li>Patients</li>
+                <li>Apps</li>
+                <li>Pharmacy</li>
+                <li>Blogs</li>
+                <li>Pages</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navbar -->
+            <div class="navbar">
+                <input type="text" placeholder="Search Keywords..." style="padding: 8px 12px; border-radius: 20px; border: 1px solid #ddd;">
+                <div class="navbar-icons">
+                    <!-- Add user icon, notifications, etc. -->
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+                <div class="card">
+                    <h3>558</h3>
+                    <p>Patients</p>
+                </div>
+                <div class="card">
+                    <h3>$2164</h3>
+                    <p>Avg. costs</p>
+                </div>
+                <div class="card">
+                    <h3>112</h3>
+                    <p>Staff Members</p>
+                </div>
+                <div class="card">
+                    <h3>16</h3>
+                    <p>Vehicles</p>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-container">
+                <!-- Bar Chart -->
+                <div class="chart-card">
+                    <canvas id="genderChart"></canvas>
+                </div>
+
+                <!-- Doughnut Chart -->
+                <div class="chart-card">
+                    <canvas id="departmentChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Latest Appointments, Chat, and Reviews -->
+            <div class="appointments-chat-reviews">
+                <!-- Latest Appointments -->
+                <div class="appointments">
+                    <h3>Latest Appointments</h3>
+                    <ul class="appointments-list">
+                        <li>
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile">
+                            <div>
+                                <p>Calvin Carlo</p>
+                                <small>Booking on 27th Nov, 2020</small>
+                            </div>
+                            <div>
+                                <span>&#10004;</span> <!-- Accept -->
+                                <span>&#10006;</span> <!-- Decline -->
+                            </div>
+                        </li>
+                        <li>
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="profile">
+                            <div>
+                                <p>Joya Khan</p>
+                                <small>Booking on 27th Nov, 2020</small>
+                            </div>
+                            <div>
+                                <span>&#10004;</span> <!-- Accept -->
+                                <span>&#10006;</span> <!-- Decline -->
+                            </div>
+                        </li>
+                        <!-- Add more appointments -->
+                    </ul>
+                </div>
+
+                <!-- Chat Section -->
+                <div class="chat-section">
+                    <h3>Cristino Murphy</h3>
+                    <div class="chat-messages">
+                        <div class="chat-message">
+                            <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="doctor">
+                            <div>
+                                <strong>Hey Christopher</strong>
+                                <p>59 min ago</p>
+                            </div>
+                        </div>
+                        <div class="chat-message">
+                            <img src="https://randomuser.me/api/portraits/women/35.jpg" alt="patient">
+                            <div>
+                                <strong>Hello Cristino</strong>
+                                <p>45 min ago</p>
+                            </div>
+                        </div>
+                        <!-- Add more messages -->
+                    </div>
+                    <div class="message-input">
+                        <input type="text" placeholder="Enter Message...">
+                        <button>&#9658;</button> <!-- Send -->
+                    </div>
+                </div>
+
+                <!-- Patients Reviews -->
+                <div class="reviews">
+                    <h3>Patients Reviews</h3>
+                    <ul class="patients-reviews-list">
+                        <li>
+                            <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="doctor">
+                            <div>
+                                <p>Dr. Calvin Carlo</p>
+                                <small>Orthopedic (150 Patients)</small>
+                            </div>
+                            <div>
+                                &#9733;&#9733;&#9733;&#9733;&#9733;
+                            </div>
+                        </li>
+                        <li>
+                            <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="doctor">
+                            <div>
+                                <p>Dr. Cristino Murphy</p>
+                                <small>Gynecology (350 Patients)</small>
+                            </div>
+                            <div>
+                                &#9733;&#9733;&#9733;&#9733;&#9734;
+                            </div>
+                        </li>
+                        <!-- Add more reviews -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Bar Chart (Patients visit by Gender)
+        const genderChartCtx = document.getElementById('genderChart').getContext('2d');
+        const genderChart = new Chart(genderChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    { label: 'Male', data: [300, 400, 450, 300, 600, 700, 900, 950, 1200, 1100, 900, 1000], backgroundColor: 'blue' },
+                    { label: 'Female', data: [200, 300, 400, 450, 500, 600, 800, 850, 1100, 1050, 950, 980], backgroundColor: 'green' },
+                    { label: 'Children', data: [100, 200, 250, 300, 350, 400, 500, 550, 600, 580, 570, 600], backgroundColor: 'orange' }
+                ]
+            }
+        });
+
+        // Doughnut Chart (Patients by Department)
+        const departmentChartCtx = document.getElementById('departmentChart').getContext('2d');
+        const departmentChart = new Chart(departmentChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Cardiology', 'Neurology', 'Orthopedic', 'Gynecology', 'Pediatrics'],
+                datasets: [{
+                    data: [40, 30, 50, 60, 70],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#dda20a', '#be2617']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

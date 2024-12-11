@@ -1,0 +1,149 @@
+<html>
+<head> 
+    <title>Registeration page
+    </title>
+    <link rel="stylesheet" href="mystyles2.css"/>
+  <style>
+    form{
+      padding: 10px;
+    border-radius: 30px;
+    border-width: 10px;
+    border-color: #b95d52;
+    border-style: double;
+    width: 35%;
+    margin-top: 5%;
+    width: 45%;
+    margin-left: 5%;
+    
+    box-shadow: 2px 2px 4px 2px rgb(0,20,30);
+}
+h1{
+  padding-top: 10px;
+}
+.button:hover{
+  background-color:rgb(177, 8, 8);
+  color:white;
+}
+body{
+    margin-left: 30%;
+    height: 20px;
+    background-image: url(picture2.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% ;
+  background-position: center;
+    
+}
+
+
+  </style>
+</head>
+<body >
+<form action="sucesspage.html">
+    <center>
+<h1> Appointment Form</h1>
+<br>
+<table>
+        <tr>
+          <td>NAME: </td>
+          <td><input type="text" required placeholder="Enter the User name"></td>
+       </tr>
+        <tr>
+            <td> PHONE NUMBER: </td> 
+          <td> <input type="tel"  name="ppersonal"id="perl" pattern="[0-9]{10}" title=" The ten digts number" >
+            <br></td> 
+        </tr>
+         <tr>
+             <td> AGE:</td>
+              <td> <input type="number" required placeholder="Enter  the Age"></td>
+            </tr>
+            <tr>
+                <td>  DATE OF BIRTH:</td> 
+                <td> <input type="date" name="bname"></td> 
+              </tr>
+            <tr>
+            <td> ENTER GENDER:</td>
+           <td><select name="ENTER GENDER" required>
+              <option value="">Select..</option>
+              <option value="male">MALE </option>
+              <option value="female">FEMALE </option>
+            </select></td> 
+          </tr>
+          <tr>
+            <td> SELECT DAY </td>
+         <td><select name="day" required> 
+                <option value="">Select Any Day..</option>
+                <option value="value">MONDAY	</option>
+                <option value="value">TUESDAY </option>
+                <option value="value">WEDNESDAY </option>
+                <option value="value">THURSDAY	</option>
+                <option value="value">FRIDAY</option>
+                <option value="value">SATURDAY</option>
+                <option value="value">SUNDAY</option>
+            </select>
+        </td>
+          </tr>
+            <td> TIME :</td> 
+            <td> <input type="time" name="btime"></td> 
+          </tr>
+    
+            <td> SPECIALIST TYPE </td>
+             <td><select name="State" required> 
+                    <option value="">Select Any One..</option>
+                    <option value="value">Cardiologists	</option>
+                    <option value="value">Endocrinologists </option>
+                    <option value="value">Orthopaedist </option>
+                    <option value="value">Gynecologist	</option>
+                    <option value="value">Dermatologist</option>
+                    <option value="value">Radiologist</option>
+                    <option value="value">Hematologist	</option>
+                    <option value="value">Neurologist </option>
+                    <option value="value">Anesthesiologist </option>
+                    <option value="value">Allergist</option>
+                    <option value="male">Psychiatrist	 </option>
+                </select>
+            </td>
+
+          <tr>
+            <td> PIN CODE: </td>
+             <td><input type="number" required placeholder="Enter your area pincode"></td>
+         </tr
+        <tr>
+        <td> SELECT STATE </td>
+         <td><select name="State" required> 
+                <option value="">Select Any One..</option>
+                <option value="value">Andhra Pradesh	</option>
+                <option value="value">Arunachal Pradesh </option>
+                <option value="value">Bihar </option>
+                <option value="value">Chhattisgarh	</option>
+                <option value="value">Goa</option>
+                <option value="value">Gujarat</option>
+                <option value="value">Haryana	</option>
+                <option value="value">Himachal Pradesh </option>
+                <option value="value">Karnataka	 </option>
+                <option value="value">Madhya Pradesh</option>
+                <option value="male">Maharashtra	 </option>
+                <option value="value">Kerala	</option>
+                <option value="value">Tamil Nadu</option>
+                <option value="value">Telangana	 </option>
+                <option value="value">Tripura	 </option>
+                <option value="value">Rajasthan	 </option>
+                <option value="value">Uttar Pradesh </option>
+                <option value="value">West Bengal </option>
+
+                </select>
+         </td>
+        </tr>
+      <tr>
+        <td>  SYMPTOMS : </td> 
+        <td> <textarea  name="text" cols="20" rows="5" placeholder="Brief description of the symptoms of your problem"></textarea></td> 
+       </tr>
+  </table>
+    <br>
+    <br>
+     <input type="submit" class="button" style="font-size: 120%; border-radius: 10px;">
+  </form>
+
+</center>
+</body>
+</html>
